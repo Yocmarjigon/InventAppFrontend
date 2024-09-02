@@ -1,0 +1,24 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="formLogin" class="login-form" (ngSubmit)="submitForm()">
+  <h1>Iniciar Seción</h1>
+  <nz-form-item>
+    <nz-form-label [nzSm]="10" [nzXs]="10" nzRequired nzFor="email">Nombre usuario</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..."   nzErrorTip="Por favor ingresa un nombre de usuario!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="name" placeholder="Ingresa el nombre de usuario" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="10" [nzXs]="14" nzRequired nzFor="email">Contraseña</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..."  nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input type="password" nz-input formControlName="password" placeholder="Ingresa tu contraseña de usuario" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <button [disabled]="formLogin.invalid" nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Ingresar</button>
+
+</form>
+
+<div></div>
