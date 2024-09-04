@@ -1,13 +1,32 @@
 @if (!complete) {
 <nz-spin nzTip="Cargando" nzSize="large"> </nz-spin>
 }@else {
+
+<button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
+  Crear
+</button>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Modal Title"
+  (nzOnCancel)="openCreate()"
+  [nzOkLoading]="isOkLoading"
+>
+  <form *nzModalContent nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input name="email" type="email" id="email" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
 <nz-table #basicTable [nzData]="sales">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Age</th>
-      <th>Address</th>
-      <th>Action</th>
+      <th>Id</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +35,19 @@
       <td>{{ data.id }}</td>
       <td>{{ data.date }}</td>
       <td>{{ data.priceTotal }}</td>
+      <td>
+        <nz-space>
+          <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </button>
+          <button *nzSpaceItem nz-button nzType="default" nzDanger nzShape="circle">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>
+          </button>
+          <button *nzSpaceItem nz-button nzType="default"  nzShape="circle">
+            <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </button>
+        </nz-space>
+      </td>
     </tr>
     }
   </tbody>

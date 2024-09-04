@@ -21,6 +21,12 @@ export const routes: Routes = [
         (m)=>m.SALE_ROUTES
       ),
       canActivate: [authGuardGuard]
+    },
+    {
+      path: "product",
+      loadChildren: ()=> import("./pages/private/product/product.routes").then(
+        (m)=> m.PRODUCT_ROUTES
+      )
     }
   ],  canActivate: [authGuardGuard]},
 
