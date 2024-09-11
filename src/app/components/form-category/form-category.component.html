@@ -1,0 +1,22 @@
+<nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Categoria"
+    (nzOnCancel)="close()"
+    [nzOkLoading]="isOkLoading"
+    [nzFooter]="modalFooter"
+  >
+    <form *nzModalContent nz-form (submit)="submit()"[formGroup]="form">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="name" >Nombre</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input name="name" id="name" formControlName="name"  placeholder="Ingresa una categoria" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <button nz-button nzType="primary">Crear</button>
+      </nz-form-item>
+    </form>
+    <ng-template #modalFooter>
+
+    </ng-template>
+  </nz-modal>

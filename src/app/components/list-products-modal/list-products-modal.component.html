@@ -1,0 +1,35 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Productos"
+  (nzOnCancel)="close()"
+  [nzOkLoading]="isOkLoading"
+  [nzFooter]="modalFooter"
+>
+  <div *nzModalContent nz-flex nzGap="10px" nzVertical="vertical">
+    <div nz-flex nzGap="10px">
+      <input nz-input type="text" name="" id="" />
+      <button nz-button nzType="primary" nzShape="circle"><span nz-icon nzType="search" nzTheme="outline"></span></button>
+    </div>
+    <nz-table #basicTable [nzData]="product">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Seleccionado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of basicTable.data; track data.id) {
+        <tr>
+          <td>{{ data.name }}</td>
+          <td>{{ data.price }}</td>
+          <td [nzAlign]="'center'"><label nz-checkbox></label></td>
+        </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary">Agregar</button>
+  </ng-template>
+</nz-modal>

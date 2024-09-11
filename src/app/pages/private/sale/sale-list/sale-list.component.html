@@ -1,19 +1,16 @@
 @if (!complete) {
   <nz-spin nzTip="Cargando" nzSize="large"> </nz-spin>
   }@else {
-
-  <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
-    Crear
-  </button>
-  <app-form-product (createdProduct)="loadProduct()"></app-form-product>
-
-  <nz-table #basicTable [nzData]="product">
+    <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
+      Crear
+    </button>
+  <app-form-sale [isVisible]="isVisible" (notVisible)="closeModal($event)"></app-form-sale>
+  <nz-table #basicTable [nzData]="sales">
     <thead>
       <tr>
         <th>Id</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Categoria</th>
+        <th>Fecha</th>
+        <th>Total</th>
         <th>Acción</th>
       </tr>
     </thead>
@@ -21,9 +18,8 @@
       @for (data of basicTable.data; track data.id) {
       <tr>
         <td>{{ data.id }}</td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.price }}</td>
-        <td>{{ data.category.name }}</td>
+        <td>{{ data.date }}</td>
+        <td>{{ data.priceTotal }}</td>
         <td>
           <nz-space>
             <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
@@ -41,6 +37,4 @@
       }
     </tbody>
   </nz-table>
-
   }
-

@@ -5,15 +5,27 @@
   <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
     Crear
   </button>
-  <app-form-product (createdProduct)="loadProduct()"></app-form-product>
-
-  <nz-table #basicTable [nzData]="product">
+  <nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Modal Title"
+    (nzOnCancel)="openCreate()"
+    [nzOkLoading]="isOkLoading"
+  >
+    <form *nzModalContent nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input name="email" type="email" id="email" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-modal>
+  <nz-table #basicTable [nzData]="order">
     <thead>
       <tr>
         <th>Id</th>
-        <th>Nombre</th>
-        <th>Precio</th>
-        <th>Categoria</th>
+        <th>Fecha llegada</th>
+        <th>Fecha</th>
         <th>Acción</th>
       </tr>
     </thead>
@@ -21,18 +33,23 @@
       @for (data of basicTable.data; track data.id) {
       <tr>
         <td>{{ data.id }}</td>
-        <td>{{ data.name }}</td>
-        <td>{{ data.price }}</td>
-        <td>{{ data.category.name }}</td>
+        <td>{{ data.date}}</td>
+        <td>{{ data.dateArrival }}</td>
         <td>
           <nz-space>
             <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
-            <button *nzSpaceItem nz-button nzType="default" nzDanger nzShape="circle">
+            <button
+              *nzSpaceItem
+              nz-button
+              nzType="default"
+              nzDanger
+              nzShape="circle"
+            >
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>
-            <button *nzSpaceItem nz-button nzType="default"  nzShape="circle">
+            <button *nzSpaceItem nz-button nzType="default" nzShape="circle">
               <span nz-icon nzType="info-circle" nzTheme="outline"></span>
             </button>
           </nz-space>
@@ -43,4 +60,3 @@
   </nz-table>
 
   }
-

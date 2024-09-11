@@ -1,0 +1,62 @@
+<app-form-category (createCategory)="loadCategory()"></app-form-category>
+<nz-modal
+    [(nzVisible)]="isVisible"
+    nzTitle="Producto"
+    (nzOnCancel)="close()"
+    [nzOkLoading]="isOkLoading"
+    [nzFooter]="modalFooter"
+  >
+    <form *nzModalContent nz-form [formGroup]="form" (ngSubmit)="submit()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="name">Nombre</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input name="name" type="name" id="name" formControlName="name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="price">Precio</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input name="price" type="price" id="price" formControlName="price"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="stock">Stock</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <input nz-input name="stock" type="stock" id="stock" formControlName="stock"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="10">
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="supplier">Proveedor</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select nzPlaceHolder="Selecciona la categoria" formControlName="supplier">
+            @for (sup of suppliers; track sup.id) {
+              <nz-option [nzValue]="sup.id" [nzLabel]="sup.name"></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzGutter="10">
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="category">Categoria</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-select nzPlaceHolder="Selecciona la categoria" formControlName="category">
+            @for (cat of categories; track cat.id) {
+              <nz-option [nzValue]="cat.id" [nzLabel]="cat.name"></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+        <button nz-button type="button" nzType="primary" nzShape="circle"  (click)="openModalCategory()"><span nz-icon nzType="plus" nzTheme="outline"></span></button>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired nzFor="email">Descripción</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+            <textarea nz-input  [rows]="5" [cols]="20"  formControlName="description" ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nzJustify="center">
+        <button nz-button nzType="primary">Crear</button>
+      </nz-form-item>
+    </form>
+    <ng-template #modalFooter>
+
+    </ng-template>
+  </nz-modal>

@@ -1,0 +1,60 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Modal Title"
+  (nzOnCancel)="close()"
+  
+  [nzOkDisabled]="true"
+  [nzOkLoading]="isOkLoading"
+  [nzFooter]="modalFooter" 
+>
+  <form  nz-form *nzModalContent [formGroup]="form()"  (submit)="submit()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired  nzFor="name">Nombre</nz-form-label>
+      <nz-form-control [nzSpan]="14"  nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="nameErrorTpl">
+        <input nz-input  id="email" formControlName="name"/>
+        <ng-template #nameErrorTpl let-control>
+          @if (control.errors?.['required']) {
+            Please input your username!
+          }
+          @if (control.errors?.['duplicated']) {
+            The username is redundant!
+          }
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired  nzFor="email">Contacto</nz-form-label>
+      <nz-form-control [nzSpan]="14" nzHasFeedback nzValidatingTip="Validating..."  [nzErrorTip]="contactErrorTpl">
+        <input nz-input name="email" type="email" id="email" formControlName="contact"/> 
+        <ng-template #contactErrorTpl let-control>
+          @if (control.errors?.['required']) {
+            Please input your username!
+          }
+          @if (control.errors?.['duplicated']) {
+            The username is redundant!
+          }
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6"  nzRequired>Correo</nz-form-label>
+      <nz-form-control [nzSpan]="14" nzHasFeedback [nzErrorTip]="emailErrorTpl">
+        <input nz-input type="email" id="email" formControlName="email"/>
+        <ng-template #emailErrorTpl let-control>
+          @if (control.errors?.['email']) {
+            The input is not valid E-mail!
+          }
+          @if (control.errors?.['required']) {
+            Please input your E-mail!
+          }
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item [nzJustify]="'center'">
+    <button nz-button nzType="primary" [disabled]="form().invalid">Crear</button>
+  </nz-form-item>
+  </form>
+
+  <ng-template #modalFooter> 
+  </ng-template>
+</nz-modal>

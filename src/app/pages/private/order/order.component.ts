@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Supplier } from '../../../models/supplier/supplier';
-import { SupplierService } from '../../../service/supplier.service';
+import { Order } from '../../../models/order/order';
+import { OrderService } from '../../../service/order.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -10,11 +10,9 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { UtilsService } from '../../../service/utils.service';
-import { FormSupplierComponent } from '../../../component/form-supplier/form-supplier.component';
 
 @Component({
-  selector: 'app-supplier',
+  selector: 'app-order',
   standalone: true,
   imports: [
     NzTableModule,
@@ -25,32 +23,24 @@ import { FormSupplierComponent } from '../../../component/form-supplier/form-sup
     NzModalModule,
     NzFormModule,
     NzSpaceModule,
-    NzIconModule,
-    FormSupplierComponent,
+    NzIconModule
   ],
-  templateUrl: './supplier.component.html',
-  styleUrl: './supplier.component.scss',
+  templateUrl: './order.component.html',
+  styleUrl: './order.component.scss'
 })
-export class SupplierComponent {
-  supplier: Supplier[] = [];
+export class OrderComponent {
+  order: Order[] = [];
   complete = false;
   isVisible = false;
   isOkLoading = false;
-  constructor(
-    private readonly supplierService: SupplierService,
-    private readonly utilsService: UtilsService
-  ) {}
-
+  constructor(private readonly supplierService: OrderService) {}
   ngOnInit(): void {
-    this.loadSuppliers();
-  }
-  public open() {
-    this.utilsService.openModal.next(true);
-  }
-  public loadSuppliers() {
     this.supplierService.findAll().subscribe({
-      next: (res) => (this.supplier = res),
+      next: (res) => (this.order = res),
       complete: () => (this.complete = true),
     });
+  }
+  public openCreate() {
+    this.isVisible = !this.isVisible;
   }
 }

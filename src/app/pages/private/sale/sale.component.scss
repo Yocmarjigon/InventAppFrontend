@@ -1,0 +1,18 @@
+@import "../../../../styles.scss";
+
+.sale-container {
+  display: flex;
+  width: 100%;
+}
+.total-container{
+
+  height: 200px;
+  button{
+    width: 100%;
+  }
+}
+.btn-generar{
+  background-color: $color-green;
+  border: 1px solid $color-green;
+}
+
