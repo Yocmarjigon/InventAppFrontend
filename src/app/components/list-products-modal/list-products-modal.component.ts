@@ -1,5 +1,5 @@
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
@@ -22,19 +22,24 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
     NzCheckboxModule,
     NzInputModule,
     NzIconModule,
-    NzFlexModule
+    NzFlexModule,
   ],
   templateUrl: './list-products-modal.component.html',
   styleUrl: './list-products-modal.component.scss',
 })
 export class ListProductsModalComponent implements OnInit {
   product: Product[] = [];
+  productsSale: Product[] = [];
+  @Output() isAddProducts = new EventEmitter<Product[]>();
   isOkLoading = false;
   isVisible = false;
+  isActive = false;
+
   constructor(
     private readonly utilsService: UtilsService,
     private readonly productService: ProductService
   ) {}
+
   ngOnInit(): void {
     this.utilsService.openModal
       .asObservable()
@@ -43,6 +48,19 @@ export class ListProductsModalComponent implements OnInit {
       .findAll()
       .subscribe({ next: (res) => (this.product = res) });
   }
+
+  public addProductList(product: Product) {
+    if(!this.productsSale.includes(product)){
+      this.productsSale.push(product);
+    }
+
+  }
+
+  public addProdcutSale() {
+    this.isAddProducts.emit([...this.productsSale]);
+    this.utilsService.openModal.next(false);
+  }
+
   close() {
     this.utilsService.openModal.next(false);
   }

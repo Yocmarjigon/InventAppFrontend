@@ -1,9 +1,9 @@
 <div nz-row class="sale-container" nzGutter="15">
-  <app-list-products-modal></app-list-products-modal>
+  <app-list-products-modal (isAddProducts)="loadProducts($event)"></app-list-products-modal>
   <div nz-col nzSpan="10">
     <div  nz-flex nzAlign="center" nzGap="10px"  nzVertical="vertical" nzJustify="center" class="total-container">
       <h2>Total</h2>
-      <h1>$ 4,500</h1>
+      <h1>$ {{priceTotal}}</h1>
       <button nz-button nzType="primary" class="btn-generar" nzSize="large">Generar</button>
     </div>
 
@@ -16,6 +16,7 @@
         <tr>
           <th>Producto</th>
           <th>Precio</th>
+          <th>Cantidad</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@
         <tr>
           <td>{{ data.name }}</td>
           <td>{{ data.price }}</td>
+          <td><nz-input-number  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number></td>
         </tr>
         }
       </tbody>

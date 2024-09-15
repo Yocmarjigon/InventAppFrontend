@@ -13,8 +13,9 @@ import { Product } from '../../../models/product/product';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { Router } from '@angular/router';
-import { ListProductsModalComponent } from "../../../components/list-products-modal/list-products-modal.component";
+import { ListProductsModalComponent } from '../../../components/list-products-modal/list-products-modal.component';
 import { UtilsService } from '../../../service/utils.service';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 @Component({
   selector: 'app-sale',
@@ -32,24 +33,48 @@ import { UtilsService } from '../../../service/utils.service';
     NzIconModule,
     FormSaleComponent,
     NzGridModule,
-    ListProductsModalComponent
-],
+    NzInputNumberModule,
+    ListProductsModalComponent,
+  ],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss',
 })
 export class SaleComponent implements OnInit {
   public products: Product[] = [];
-  ngOnInit(): void {}
+  public priceTotal: number = 0;
+  public priceTotalFormater = '0';
+
 
   constructor(
     private readonly router: Router,
     private readonly utilsService: UtilsService
   ) {}
 
-  public redirectSaleList() {
-    this.router.navigate(["sale-list"])
+  ngOnInit(): void {}
+
+  public loadProducts(event: Product[]) {
+    this.products = event;
+    for(let i = 0; i<event.length; i++){
+      let price = parseFloat(event[i].price.slice(1, event[i].price.length).replace(/,/g, ""));
+
+      this.priceTotal = this.priceTotal + price;
+
+      let priceFormat = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 2
+      }).format(this.priceTotal)
+
+      console.log(event[i].price.slice(1, event[i].price.length).replace(",", ""));
+    }
+
+
   }
-  open(){
-    this.utilsService.openModal.next(true)
+
+  public redirectSaleList() {
+    this.router.navigate(['sale-list']);
+  }
+  open() {
+    this.utilsService.openModal.next(true);
   }
 }
