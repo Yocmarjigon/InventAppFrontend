@@ -1,13 +1,31 @@
-<div nz-row class="sale-container" nzGutter="15">
-  <app-list-products-modal (isAddProducts)="loadProducts($event)"></app-list-products-modal>
-  <div nz-col nzSpan="10">
-    <div  nz-flex nzAlign="center" nzGap="10px"  nzVertical="vertical" nzJustify="center" class="total-container">
+<div nz-row class="sale-container">
+  <app-list-products-modal
+    (isAddProducts)="loadProducts($event)"
+  ></app-list-products-modal>
+  <div nz-col nzSpan="10"  nzFlex="auto">
+    <button nz-button nzType="primary" (click)="redirectSaleList()">
+      Ventas
+    </button>
+    <div
+      nz-flex
+      nzAlign="center"
+      nzGap="10px"
+      nzVertical="vertical"
+      nzJustify="center"
+      class="total-container"
+    >
       <h2>Total</h2>
-      <h1>$ {{priceTotal}}</h1>
-      <button nz-button nzType="primary" class="btn-generar" nzSize="large">Generar</button>
+      <h1>{{ priceTotalFormater }}</h1>
+      <button
+        nz-button
+        nzType="primary"
+        class="btn-generar"
+        nzSize="large"
+        (click)="generateSale()"
+      >
+        Generar
+      </button>
     </div>
-
-    <button nz-button nzType="primary" (click)="redirectSaleList()">Ventas</button>
   </div>
   <div nz-col nzFlex="auto">
     <button nz-button nzType="primary" (click)="open()">Agregar</button>
@@ -17,14 +35,27 @@
           <th>Producto</th>
           <th>Precio</th>
           <th>Cantidad</th>
+          <th>Acción</th>
         </tr>
       </thead>
       <tbody>
-        @for (data of basicTable.data; track data.id) {
+        @for (data of basicTable.data; track data.id; let inx = $index) {
         <tr>
           <td>{{ data.name }}</td>
           <td>{{ data.price }}</td>
-          <td><nz-input-number  [nzMin]="1" [nzMax]="10" [nzStep]="1"></nz-input-number></td>
+          <td>
+            <nz-input-number
+              [(ngModel)]="inputsValues[inx]"
+              [nzMin]="1"
+              [nzMax]="10"
+              (ngModelChange)="initializeInputsNumbers(inx, $event)"
+            ></nz-input-number>
+          </td>
+          <td>
+            <button nz-button nzShape="circle" nzDanger>
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+          </td>
         </tr>
         }
       </tbody>
