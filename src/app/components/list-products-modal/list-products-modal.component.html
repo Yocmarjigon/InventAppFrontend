@@ -12,7 +12,7 @@
         <span nz-icon nzType="search" nzTheme="outline"></span>
       </button>
     </div>
-    <nz-table #basicTable [nzData]="product">
+    <nz-table #basicTable [nzData]="product" [nzPageSize]="50" [nzScroll]="{ y: '240px' }">
       <thead>
         <tr>
           <th>Nombre</th>

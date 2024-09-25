@@ -7,7 +7,7 @@
   </button>
   <app-form-product (createdProduct)="loadProduct()"></app-form-product>
 
-  <nz-table #basicTable [nzData]="product">
+  <nz-table #basicTable [nzData]="product" [nzPageSize]="10" [nzScroll]="{ y: '300px' }">
     <thead>
       <tr>
         <th>Id</th>

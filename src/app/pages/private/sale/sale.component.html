@@ -3,7 +3,7 @@
     (isAddProducts)="loadProducts($event)"
   ></app-list-products-modal>
   <div nz-col nzSpan="10"  nzFlex="auto">
-    <button nz-button nzType="primary" (click)="redirectSaleList()">
+    <button nz-button nzType="primary" (click)="redirectSaleList()" class="btn-redirect-sale">
       Ventas
     </button>
     <div
@@ -35,7 +35,7 @@
           <th>Producto</th>
           <th>Precio</th>
           <th>Cantidad</th>
-          <th>Acción</th>
+          <th nzWidth="100px">Acción</th>
         </tr>
       </thead>
       <tbody>
@@ -51,8 +51,8 @@
               (ngModelChange)="initializeInputsNumbers(inx, $event)"
             ></nz-input-number>
           </td>
-          <td>
-            <button nz-button nzShape="circle" nzDanger>
+          <td nzWidth="100px">
+            <button nz-button nzShape="circle" nzDanger (click)="deleteProduct(inx)">
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>
           </td>

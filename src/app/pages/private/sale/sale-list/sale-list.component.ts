@@ -11,6 +11,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { Sale } from '../../../../models/sale.interface';
 import { SaleService } from '../../../../service/sale.service';
+import { Router } from '@angular/router';
+import { DetailsSaleModalComponent } from './details-sale-modal/details-sale-modal.component';
 
 @Component({
   selector: 'app-sale-list',
@@ -25,28 +27,55 @@ import { SaleService } from '../../../../service/sale.service';
     NzFormModule,
     NzSpaceModule,
     NzIconModule,
-    FormSaleComponent
+    FormSaleComponent,
+    DetailsSaleModalComponent,
   ],
 
   templateUrl: './sale-list.component.html',
-  styleUrl: './sale-list.component.scss'
+  styleUrl: './sale-list.component.scss',
 })
 export class SaleListComponent {
   sales: Sale[] = [];
   complete = false;
-  isVisible = false;
+  isVisibleDetails = false;
   isOkLoading = false;
-  constructor(private readonly saleService: SaleService) {}
+  sale!: Sale;
+
+  constructor(
+    private readonly saleService: SaleService,
+    private readonly router: Router
+  ) {}
   ngOnInit(): void {
-    this.saleService.findAll().subscribe({
-      next: (res) => (this.sales = res),
+    this.loadSale()
+  }
+  public loadSale() {
+  this.saleService.findAll().subscribe({
+      next: (res) => {
+        this.sales = res;
+        console.log(res);
+      },
       complete: () => (this.complete = true),
     });
   }
-  public openCreate() {
-    this.isVisible = !this.isVisible;
+
+  public redirectCreateSale() {
+    this.router.navigate(['/sale']);
   }
-  public closeModal(value: boolean){
-    this.isVisible = value
+  public closeModal(value: boolean) {
+    this.isVisibleDetails = value;
+  }
+  public openModalDetails(sale: Sale) {
+    this.isVisibleDetails = true;
+    this.sale = sale;
+  }
+  public deleteSale(id: string) {
+    this.saleService.delete(id).subscribe({
+      next: (res) =>{
+        console.log(res);
+        this.loadSale()
+
+      },
+      error: (err) => console.log(err),
+    });
   }
 }

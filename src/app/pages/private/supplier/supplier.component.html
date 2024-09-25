@@ -6,7 +6,7 @@
   Crear
 </button>
 <app-form-supplier (createdSupplier)="loadSuppliers()"></app-form-supplier>
-<nz-table #basicTable [nzData]="supplier">
+<nz-table #basicTable [nzData]="supplier" [nzPageSize]="10" [nzScroll]="{ y: '300px' }">
   <thead>
     <tr>
       <th>Id</th>

@@ -31,6 +31,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-product',
@@ -74,7 +75,8 @@ export class FormProductComponent implements OnInit {
     private readonly utilsService: UtilsService,
     private readonly categoryService: CategoryService,
     private readonly supplierService: SupplierService,
-    private readonly productService: ProductService
+    private readonly productService: ProductService,
+    private readonly router: Router
   ) {}
   ngOnInit(): void {
     /* this.utilsService.stateModal.subscribe({next: (value)=> this.isVisible = value}) */
@@ -88,6 +90,9 @@ export class FormProductComponent implements OnInit {
     this.supplierService
       .findAll()
       .subscribe({ next: (res) => (this.suppliers = res) });
+  }
+  public redirectSupplier(){
+    this.router.navigate(["/supplier"])
   }
   public loadCategory() {
     this.categoryService.findAll().subscribe({
