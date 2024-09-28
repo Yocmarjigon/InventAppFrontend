@@ -64,4 +64,13 @@ export class ProductComponent implements OnInit {
       },
     });
   }
+  public deleteProduct(id:string){
+    this.productService.delete(id).subscribe({next: (res)=>{
+      console.log(res)
+    },
+    error: (err)=>{
+      console.log(err)
+    }
+  })
+  }
 }

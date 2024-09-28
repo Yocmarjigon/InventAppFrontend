@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { forwardRef, Inject, Injectable } from '@angular/core';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 export class NotificationService {
 
   constructor(
-    private readonly notification: NzNotificationService
+private notification: NzNotificationService,
+
   ) { }
 
    public notificationOpen(title: string, description: string, color: string) {
@@ -25,4 +27,5 @@ export class NotificationService {
       }
     );
   }
+
 }

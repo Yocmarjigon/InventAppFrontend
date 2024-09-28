@@ -29,7 +29,7 @@
             <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
-            <button *nzSpaceItem nz-button nzType="default" nzDanger nzShape="circle">
+            <button *nzSpaceItem nz-button nzType="default" nzDanger nzShape="circle" (click)="deleteProduct(data.id)">
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>
             <button *nzSpaceItem nz-button nzType="default"  nzShape="circle">
