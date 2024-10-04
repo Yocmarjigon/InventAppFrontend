@@ -1,13 +1,28 @@
-@if (!complete) {
-  <nz-spin nzTip="Cargando" nzSize="large"> </nz-spin>
-  }@else {
-
-  <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
-    Crear
-  </button>
-  <app-form-product (createdProduct)="loadProduct()"></app-form-product>
-
-  <nz-table #basicTable [nzData]="product" [nzPageSize]="10" [nzScroll]="{ y: '300px' }">
+<div class="product-container">
+  <div nz-flex nzJustify="space-between" nzGap="10px">
+    <div nz-flex nzGap="10px" class="search-container" nzAlign="center">
+      <input nz-input type="text" name="" id="" />
+      <button nz-button nzType="primary" nzShape="circle">
+        <span nz-icon nzType="search" nzTheme="outline"></span>
+      </button>
+    </div>
+    <button
+      nz-button
+      [nzSize]="'large'"
+      nzType="primary"
+      (click)="openCreate()"
+    >
+      Crear
+    </button>
+    <app-form-product (createdProduct)="loadProduct()"></app-form-product>
+  </div>
+  <nz-table
+    #basicTable
+    [nzData]="product"
+    [nzPageSize]="10"
+    [nzScroll]="{ y: '300px' }"
+    [nzLoading]="complete"
+  >
     <thead>
       <tr>
         <th>Id</th>
@@ -26,13 +41,28 @@
         <td>{{ data.category.name }}</td>
         <td>
           <nz-space>
-            <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
+            <button
+              *nzSpaceItem
+              nz-button
+              icon
+              nzType="primary"
+              nzShape="circle"
+            >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
-            <button *nzSpaceItem nz-button nzType="default" nzDanger nzShape="circle" (click)="deleteProduct(data.id)">
+            <button
+              *nzSpaceItem
+              nz-button
+              nzType="default"
+              nzDanger
+              nzShape="circle"
+              nz-popconfirm
+              nzPopconfirmTitle="Deseas eliminar este producto"
+              (nzOnConfirm)="deleteProduct(data.id)"
+            >
               <span nz-icon nzType="delete" nzTheme="outline"></span>
             </button>
-            <button *nzSpaceItem nz-button nzType="default"  nzShape="circle">
+            <button *nzSpaceItem nz-button nzType="default" nzShape="circle">
               <span nz-icon nzType="info-circle" nzTheme="outline"></span>
             </button>
           </nz-space>
@@ -41,6 +71,4 @@
       }
     </tbody>
   </nz-table>
-
-  }
-
+</div>

@@ -12,6 +12,9 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { UtilsService } from '../../../service/utils.service';
 import { FormSupplierComponent } from '../../../component/form-supplier/form-supplier.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
   selector: 'app-supplier',
@@ -26,6 +29,9 @@ import { FormSupplierComponent } from '../../../component/form-supplier/form-sup
     NzFormModule,
     NzSpaceModule,
     NzIconModule,
+    NzInputModule,
+    NzFlexModule,
+    NzPopconfirmModule,
     FormSupplierComponent,
   ],
   templateUrl: './supplier.component.html',
@@ -36,6 +42,7 @@ export class SupplierComponent {
   complete = false;
   isVisible = false;
   isOkLoading = false;
+
   constructor(
     private readonly supplierService: SupplierService,
     private readonly utilsService: UtilsService
@@ -44,13 +51,29 @@ export class SupplierComponent {
   ngOnInit(): void {
     this.loadSuppliers();
   }
+
   public open() {
     this.utilsService.openModal.next(true);
   }
+
   public loadSuppliers() {
     this.supplierService.findAll().subscribe({
       next: (res) => (this.supplier = res),
-      complete: () => (this.complete = true),
+      complete: () => (this.complete = false),
     });
   }
+
+  public deleteSupplier(id:string){
+    this.supplierService.delete(id).subscribe({
+      next: (res)=> {
+        console.log(res);
+        this.loadSuppliers();
+      },
+      complete: ()=> this.complete = true,
+      error: (err)=> console.log(err)
+    })
+
+  }
+
+
 }

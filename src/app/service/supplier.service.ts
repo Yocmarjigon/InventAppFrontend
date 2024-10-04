@@ -16,10 +16,15 @@ export class SupplierService {
   ) { }
 
   public findAll(): Observable<Supplier[]>{
-    return this.http.get<Supplier[]>(this.url + "/find-all");
+    return this.http.get<Supplier[]>(`${this.url}/find-all`);
   }
+
   public save(supplier: any):Observable<ResponseOk>{
-    return this.http.post<ResponseOk>(this.url +"/save", supplier);
+    return this.http.post<ResponseOk>(`${this.url}/save`, supplier);
+  }
+
+  public delete(id:string): Observable<ResponseOk>{
+    return this.http.delete<ResponseOk>(`${this.url}/delete/${id}`);
   }
 }
 

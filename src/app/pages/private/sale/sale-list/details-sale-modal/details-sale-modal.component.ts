@@ -19,6 +19,7 @@ public isOkLoading: boolean = false;
 @Input() isVisible: boolean = false;
 @Input() sale!: Sale;
 @Output() isClosed: EventEmitter<boolean> = new EventEmitter(this.isVisible);
+
 ngOnInit(): void {
   console.log(this.sale)
 }

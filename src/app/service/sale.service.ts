@@ -12,12 +12,12 @@ export class SaleService {
   private url = 'http://localhost:8080/sale';
   constructor(private readonly http: HttpClient) { }
   public findAll(): Observable<Sale[]>{
-    return this.http.get<Sale[]>(this.url + "/find-all");
+    return this.http.get<Sale[]>(`${this.url}/find-all`);
   }
   public save(produts: ProductSold[]): Observable<ResponseOk>{
-    return this.http.post<ResponseOk>(this.url + "/save", produts);
+    return this.http.post<ResponseOk>(`${this.url}/save`, produts);
   }
   public delete(id: string):Observable<ResponseOk>{
-    return this.http.delete(this.url + "/delete/" + id);
+    return this.http.delete(`${this.url}/delete/${id}`);
   }
 }

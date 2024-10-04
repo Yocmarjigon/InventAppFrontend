@@ -14,6 +14,8 @@ import { SaleService } from '../../../../service/sale.service';
 import { Router } from '@angular/router';
 import { DetailsSaleModalComponent } from './details-sale-modal/details-sale-modal.component';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
 
 
 @Component({
@@ -30,6 +32,8 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzSpaceModule,
     NzIconModule,
     NzPopconfirmModule,
+    NzInputModule,
+    NzFlexModule,
     FormSaleComponent,
     DetailsSaleModalComponent,
 ],
@@ -72,22 +76,10 @@ export class SaleListComponent {
     this.sale = sale;
   }
   public deleteSale(id: string) {
-    console.log(id)
-/*     this.modalService.confirm({
-      nzTitle: "Confirmar",
-      nzContent: "Desea eliminar esta venta",
-      nzOnOk: ()=>{
-        this.saleService.delete(id).subscribe({
-          next: (res) =>{
-            console.log(res);
-            this.loadSale()
-            complete= true;
-          },
-          complete: ()=> complete = false,
-          error: (err) => console.log(err),
-        });
-      },
-      nzOkLoading: complete
-    }) */
+    this.saleService.delete(id).subscribe({
+      next: (res)=>{this.loadSale()},
+      complete: ()=> this.complete = false,
+      error: (err)=> console.log(err)
+    })
   }
 }

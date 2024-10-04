@@ -35,29 +35,29 @@
         <span>Pedidos</span>
       </li>
       <li nz-button nz-flex nzAlign="center" nzJustify="center">
-        <button  nz-button nzType="primary" nzDanger (click)="logout()">Logout</button>
+        <button nz-button nzType="primary" nzDanger (click)="logout()">
+          Logout
+        </button>
       </li>
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header" nz-flex nzAlign="center" nzJustify="space-between">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed"  >
+      <div
+        class="app-header"
+        nz-flex
+        nzAlign="center"
+        nzJustify="space-between"
+      >
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
           <span
             class="trigger"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
-        <div class="badge-norification">
-
-          <nz-badge [nzCount]="5" (click)="res()" class="btn-notification">
-            <a class="head-example"></a>
-            <span nz-icon nzType="notification" nzTheme="outline" class="icon-notification" nzIconfont=""></span>
-          </nz-badge>
-        </div>
+        <app-menu-notification />
       </div>
-
     </nz-header>
     <nz-content>
       <div class="inner-content">

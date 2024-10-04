@@ -86,6 +86,7 @@ export class SaleComponent implements OnInit {
     this.inputsValues[index] = value;
     this.calculationTotal();
   }
+
   //Función para calcular el total de la venta
   public calculationTotal() {
     this.priceTotal = 0;
@@ -116,6 +117,7 @@ export class SaleComponent implements OnInit {
       this.priceTotalFormater = '0';
     }
   }
+
 //Función para generar una venta
   public generateSale() {
     if (this.products.length !== 0) {

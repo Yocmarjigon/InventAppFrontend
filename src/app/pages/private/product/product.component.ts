@@ -15,6 +15,9 @@ import { FormProductComponent } from '../../../components/form-product/form-prod
 import { CategoryService } from '../../../service/category.service';
 import { Category } from '../../../models/category/category';
 import { FormCategoryComponent } from '../../../components/form-category/form-category.component';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
   selector: 'app-product',
@@ -29,6 +32,10 @@ import { FormCategoryComponent } from '../../../components/form-category/form-ca
     NzFormModule,
     NzSpaceModule,
     NzIconModule,
+    NzInputModule,
+    NzFlexModule,
+    NzPopconfirmModule,
+  //--------------------
     FormProductComponent,
     FormCategoryComponent
   ],
@@ -38,7 +45,7 @@ import { FormCategoryComponent } from '../../../components/form-category/form-ca
 export class ProductComponent implements OnInit {
   product: Product[] = [];
   categories: Category[] = [];
-  complete = false;
+  complete = true;
   isVisible = false;
   isOkLoading = false;
 
@@ -60,13 +67,13 @@ export class ProductComponent implements OnInit {
     this.productService.findAll().subscribe({
       next: (res) => {
         this.product = res;
-        this.complete = true
+        this.complete = false
       },
     });
   }
   public deleteProduct(id:string){
     this.productService.delete(id).subscribe({next: (res)=>{
-      console.log(res)
+      this.loadProduct()
     },
     error: (err)=>{
       console.log(err)

@@ -1,50 +1,70 @@
-@if (!complete) {
-<nz-spin nzTip="Cargando" nzSize="large"> </nz-spin>
-}@else {
+<div class="supplier-container">
+  <div nz-flex nzJustify="space-between" nzGap="10px">
+    <div nz-flex nzGap="10px" class="search-container" nzAlign="center">
+      <input nz-input type="text" name="" id=""/>
+      <button nz-button nzType="primary" nzShape="circle">
+        <span nz-icon nzType="search" nzTheme="outline"></span>
+      </button>
+    </div>
 
-<button nz-button [nzSize]="'large'" nzType="primary" (click)="open()">
-  Crear
-</button>
-<app-form-supplier (createdSupplier)="loadSuppliers()"></app-form-supplier>
-<nz-table #basicTable [nzData]="supplier" [nzPageSize]="10" [nzScroll]="{ y: '300px' }">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nombre</th>
-      <th>Correo</th>
-      <th>Contacto</th>
-      <th>Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (data of basicTable.data; track data.id) {
-    <tr>
-      <td>{{ data.id }}</td>
-      <td>{{ data.name }}</td>
-      <td>{{ data.email }}</td>
-      <td>{{ data.contact }}</td>
-      <td>
-        <nz-space>
-          <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
-            <span nz-icon nzType="edit" nzTheme="outline"></span>
-          </button>
-          <button
-            *nzSpaceItem
-            nz-button
-            nzType="default"
-            nzDanger
-            nzShape="circle"
-          >
-            <span nz-icon nzType="delete" nzTheme="outline"></span>
-          </button>
-          <button *nzSpaceItem nz-button nzType="default" nzShape="circle">
-            <span nz-icon nzType="info-circle" nzTheme="outline"></span>
-          </button>
-        </nz-space>
-      </td>
-    </tr>
-    }
-  </tbody>
-</nz-table>
+    <button nz-button [nzSize]="'large'" nzType="primary" (click)="open()">
+      Crear
+    </button>
+  </div>
 
-}
+  <app-form-supplier (createdSupplier)="loadSuppliers()"></app-form-supplier>
+  <nz-table
+    #basicTable
+    [nzData]="supplier"
+    [nzPageSize]="10"
+    [nzScroll]="{ y: '300px' }"
+  >
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Contacto</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (data of basicTable.data; track data.id) {
+      <tr>
+        <td>{{ data.id }}</td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.email }}</td>
+        <td>{{ data.contact }}</td>
+        <td>
+          <nz-space>
+            <button
+              *nzSpaceItem
+              nz-button
+              icon
+              nzType="primary"
+              nzShape="circle"
+            >
+              <span nz-icon nzType="edit" nzTheme="outline"></span>
+            </button>
+            <button
+              *nzSpaceItem
+              nz-button
+              nzType="default"
+              nzDanger
+              nzShape="circle"
+              nz-popconfirm
+              nzPopconfirmTitle="Quieres eliminar este proveedor"
+              (nzOnConfirm)="deleteSupplier(data.id)"
+            >
+              <span nz-icon nzType="delete" nzTheme="outline"></span>
+            </button>
+            <button *nzSpaceItem nz-button nzType="default" nzShape="circle">
+              <span nz-icon nzType="info-circle" nzTheme="outline"></span>
+            </button>
+          </nz-space>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>

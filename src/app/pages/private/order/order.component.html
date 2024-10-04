@@ -1,25 +1,8 @@
-@if (!complete) {
-  <nz-spin nzTip="Cargando" nzSize="large"> </nz-spin>
-  }@else {
-
-  <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()">
+<div class="container-order">
+  <app-form-order [isVisible]="isVisible" (isClosed)="close($event)"></app-form-order >
+  <button nz-button [nzSize]="'large'" nzType="primary" (click)="openCreate()" >
     Crear
   </button>
-  <nz-modal
-    [(nzVisible)]="isVisible"
-    nzTitle="Modal Title"
-    (nzOnCancel)="openCreate()"
-    [nzOkLoading]="isOkLoading"
-  >
-    <form *nzModalContent nz-form>
-      <nz-form-item>
-        <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label>
-        <nz-form-control [nzSpan]="14">
-          <input nz-input name="email" type="email" id="email" />
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  </nz-modal>
   <nz-table #basicTable [nzData]="order">
     <thead>
       <tr>
@@ -33,11 +16,17 @@
       @for (data of basicTable.data; track data.id) {
       <tr>
         <td>{{ data.id }}</td>
-        <td>{{ data.date}}</td>
+        <td>{{ data.date }}</td>
         <td>{{ data.dateArrival }}</td>
         <td>
           <nz-space>
-            <button *nzSpaceItem nz-button icon nzType="primary" nzShape="circle">
+            <button
+              *nzSpaceItem
+              nz-button
+              icon
+              nzType="primary"
+              nzShape="circle"
+            >
               <span nz-icon nzType="edit" nzTheme="outline"></span>
             </button>
             <button
@@ -58,5 +47,4 @@
       }
     </tbody>
   </nz-table>
-
-  }
+</div>

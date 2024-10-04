@@ -1,0 +1,53 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Modal Title"
+  (nzOnCancel)="close()"
+  [nzOkDisabled]="true"
+  [nzOkLoading]="isOkLoading"
+  [nzFooter]="modalFooter"
+>
+  <form nz-form *nzModalContent [formGroup]="form" (submit)="submit()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired >Proveedor</nz-form-label>
+      <nz-form-control
+        [nzSpan]="14"
+        nzHasFeedback
+        nzValidatingTip="Validating..."
+        [nzErrorTip]="nameErrorTpl"
+      >
+        <nz-select ngModel="lucy" formControlName="supplier">
+          @for (data of suppliers; track $index) {
+          <nz-option [nzValue]="data.id" [nzLabel]="data.name"></nz-option>
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired nzFor="name"
+        >Fecha de llegada</nz-form-label
+      >
+      <nz-form-control
+        [nzSpan]="14"
+        nzHasFeedback
+        nzValidatingTip="Validating..."
+        [nzErrorTip]="nameErrorTpl"
+      >
+        <nz-date-picker
+          [(ngModel)]="date"
+          (ngModelChange)="onChange($event)"
+          formControlName="dateArribal"
+        ></nz-date-picker>
+        <ng-template #nameErrorTpl let-control>
+          @if (control.errors?.['required']) { Please input your username! } @if
+          (control.errors?.['duplicated']) { The username is redundant! }
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <button nz-button>Crear</button>
+    </nz-form-item>
+  </form>
+
+  <ng-template #modalFooter> </ng-template>
+</nz-modal>

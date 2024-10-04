@@ -8,6 +8,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { AuthService } from '../../../service/auth.service';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { MenuNotificationComponent } from '../../../components/menu-notification/menu-notification.component';
 @Component({
   selector: 'app-private',
   standalone: true,
@@ -19,7 +20,9 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
     NzButtonModule,
     NzSpaceModule,
     NzFlexModule,
-    NzBadgeModule
+    NzBadgeModule,
+
+    MenuNotificationComponent
   ],
   templateUrl: './private.component.html',
   styleUrl: './private.component.scss',

@@ -1,0 +1,25 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Venta"
+  (nzOnCancel)="close()"
+  [nzOkLoading]="isOkLoading"
+  [nzFooter]="modalFooter"
+>
+  <div *nzModalContent nz-flex nzGap="10px" nzVertical="vertical">
+
+    <h3>Nombre:</h3>
+    <p>{{product.name}}</p>
+    <h3>Fecha:</h3>
+    <p>{{product.dateAdd}}</p>
+    <h3>Stock:</h3>
+    <p>{{product.stock}}</p>
+    <h3>Categoria:</h3>
+    <p>{{product.category}}</p>
+    <h3>Provedor:</h3>
+  </div>
+<ng-template #modalFooter>
+
+</ng-template>
+</nz-modal>
+
+

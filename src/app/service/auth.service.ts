@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   public login(user: any) {
-    this.http.post<AuthUser>(this.url + '/login', user).subscribe({
+    this.http.post<AuthUser>(`${this.url}/login`, user).subscribe({
       next: (res) => {
         this.isAuthenticate = true;
         localStorage.setItem("TOKEN_JWT", res.jwt)

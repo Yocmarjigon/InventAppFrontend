@@ -1,0 +1,22 @@
+
+.icon-notification {
+  font-size: 22px;
+  color: #fff;
+}
+.btn-notification {
+  cursor: pointer;
+  background-color: #1890ff;
+  padding: 5px;
+  border-radius: 50px;
+
+:hover{
+  background-color: #4692d8;
+
+}
+}
+.badge-norification {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}

@@ -12,7 +12,7 @@ export class CategoryService {
   constructor(private readonly http: HttpClient) { }
 
   public findAll():Observable<Category[]>{
-    return this.http.get<Category[]>(this.url + "/find-all");
+    return this.http.get<Category[]>(`${this.url}/find-all`);
   }
 
   public save(category: any): Observable<ResponseOk>{
