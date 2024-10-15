@@ -8,7 +8,7 @@ import { ResponseOk } from '../models/response-ok';
   providedIn: 'root'
 })
 export class CategoryService {
-  private url = "http://localhost:8080/category"
+  private url = "https://inventappbackend.onrender.com/category"
   constructor(private readonly http: HttpClient) { }
 
   public findAll():Observable<Category[]>{

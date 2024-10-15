@@ -19,6 +19,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { SupplierService } from '../../service/supplier.service';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import moment from "moment";
 
 @Component({
   selector: 'app-form-order',
@@ -30,25 +31,25 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzModalModule,
     NzDatePickerModule,
     NzSelectModule,
-    NzButtonModule
+    NzButtonModule,
   ],
   templateUrl: './form-order.component.html',
   styleUrl: './form-order.component.scss',
 })
 export class FormOrderComponent implements OnInit {
-
   @Input() isVisible = false;
-  isOkLoading = false;
+  public isOkLoading = false;
   public suppliers: Supplier[] = [];
   @Output() isClosed = new EventEmitter(false);
-  isConfirmLoading = false;
-  date: any;
+  public isConfirmLoading = false;
+  public date: any;
+
+  public form = new FormGroup({
+    supplier: new FormControl(''),
+    dateArribal: new FormControl(''),
+  });
 
   constructor(private readonly supplierService: SupplierService) {}
-  public form = new FormGroup({
-      supplier: new FormControl(''),
-      dateArribal: new FormControl(''),
-    })
 
 
   ngOnInit(): void {
@@ -66,12 +67,19 @@ export class FormOrderComponent implements OnInit {
     });
   }
 
+  public  formatDate(result: Date){
+    if(result){
+      const formatter = moment(result).format('YYYY-MM-DD')
+      this.form.get('dateArribal')?.setValue(formatter);
+    }
+  }
+
   close() {
     this.isVisible = false;
     this.isClosed.emit(false);
   }
 
   submit() {
-    console.log(this.form.value)
+    console.log(this.form.value);
   }
 }

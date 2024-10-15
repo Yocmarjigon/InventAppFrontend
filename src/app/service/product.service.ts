@@ -8,7 +8,7 @@ import { ResponseOk } from '../models/response-ok';
   providedIn: 'root'
 })
 export class ProductService {
-  private url = "http://localhost:8080/product"
+  private url = "https://inventappbackend.onrender.com/product"
   constructor(
     private readonly http: HttpClient
   ) { }

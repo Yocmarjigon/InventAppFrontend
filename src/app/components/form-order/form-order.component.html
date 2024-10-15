@@ -8,7 +8,7 @@
 >
   <form nz-form *nzModalContent [formGroup]="form" (submit)="submit()">
     <nz-form-item>
-      <nz-form-label [nzSpan]="6" nzRequired >Proveedor</nz-form-label>
+      <nz-form-label [nzSpan]="6" nzRequired>Proveedor</nz-form-label>
       <nz-form-control
         [nzSpan]="14"
         nzHasFeedback
@@ -35,12 +35,12 @@
       >
         <nz-date-picker
           [(ngModel)]="date"
-          (ngModelChange)="onChange($event)"
+          (ngModelChange)="formatDate($event)"
           formControlName="dateArribal"
         ></nz-date-picker>
         <ng-template #nameErrorTpl let-control>
-          @if (control.errors?.['required']) { Please input your username! } @if
-          (control.errors?.['duplicated']) { The username is redundant! }
+          @if (control.errors?.['required']) { Please input your username! }
+          @if(control.errors?.['duplicated']) { The username is redundant! }
         </ng-template>
       </nz-form-control>
     </nz-form-item>

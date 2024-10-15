@@ -9,7 +9,7 @@ import { SupplierSave } from '../models/supplier/supplier-save';
   providedIn: 'root'
 })
 export class SupplierService {
-  private url = "http://localhost:8080/supplier"
+  private url = "https://inventappbackend.onrender.com/supplier"
 
   constructor(
     private readonly http: HttpClient

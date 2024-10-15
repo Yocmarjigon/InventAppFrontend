@@ -9,7 +9,8 @@ import { AuthUser } from '../models/auth-user.interface';
 })
 export class AuthService {
   private isAuthenticate = false;
-  private url = 'http://localhost:8080/auth';
+  private url = 'https://inventappbackend.onrender.com/auth';
+
   constructor(
     private readonly http: HttpClient,
     private readonly router: Router

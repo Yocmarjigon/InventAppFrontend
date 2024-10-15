@@ -9,7 +9,7 @@ import { ResponseOk } from '../models/response-ok';
   providedIn: 'root'
 })
 export class SaleService {
-  private url = 'http://localhost:8080/sale';
+  private url = 'https://inventappbackend.onrender.com/sale';
   constructor(private readonly http: HttpClient) { }
   public findAll(): Observable<Sale[]>{
     return this.http.get<Sale[]>(`${this.url}/find-all`);

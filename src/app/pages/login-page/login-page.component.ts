@@ -19,6 +19,7 @@ export class LoginPageComponent {
   })
 
   public submitForm(){
-    console.log(this.formLogin.value)
+
+
   }
 }
